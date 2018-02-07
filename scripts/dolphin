@@ -1,5 +1,6 @@
 #!/bin/bash
 
+DOLPHINCFG="non-public/dolphin/Config/Dolphin.ini"
 GAMES="/home/sd/games/ROMs"
 CONTROLLERS="/dev/input/virtual"
 
@@ -9,20 +10,24 @@ if [ ! -d "$CONTROLLERS" ]; then
 	exit 0
 fi
 
-
-rm non-public/dolphin/GC
+CARD=
 case "$1" in
 	EasyMode)
-		ln -s Cards/easy non-public/dolphin/GC
+		CARD=Cards/easy
 		;;
 	HardMode)
-		ln -s Cards/hard non-public/dolphin/GC
-		;;
-	*)
-		printf "No such card\n"
-		exit 1
+		CARD=Cards/hard
 		;;
 esac
+
+if [ -z "$CARD" ]; then
+	printf "No gamecard given\n"
+	exit 1
+fi
+
+for slot in A B; do
+	sed -i -E "s,^Memcard${slot}Path = (.*)$,Memcard${slot}Path = non-public/dolphin/${CARD}/MemoryCard${slot}.EUR.raw,g" "$DOLPHINCFG"
+done
 
 IMG="$GAMES/$2.iso"
 if [ ! -f "$IMG" ]; then
