@@ -1,0 +1,27 @@
+#!/bin/bash
+match=0
+
+echo "$1" >> logs/video-history.log
+
+# Fix up missing protocols
+if [[ "$1" == https://* ]]; then
+	VIDEO="$1"
+else
+	VIDEO="https://$1"
+fi
+
+while read line; do
+	case "$VIDEO" in "$line"*)
+		match=1
+		break
+	esac
+done < config/stream-whitelist
+
+if [ "$match" -eq 0 ]; then
+	xecho -no-stdin -fc red -bc black -maxsize 100 "URL not whitelisted"
+	exit 1
+fi
+
+xecho -no-stdin -fc red -bc black -maxsize 100 "Please wait..." &
+mpv --input-file=control/$LOCATION-mpv --include=config/mpv/$LOCATION --ytdl "$VIDEO"
+kill $(jobs -p)

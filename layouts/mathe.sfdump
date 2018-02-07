@@ -1,0 +1,7 @@
+(frame :number 0 :x 0 :y 0 :width 320 :height 200 :screenw 1280 :screenh 1024) 0,
+(frame :number 3 :x 320 :y 0 :width 320 :height 200 :screenw 1280 :screenh 1024) 0,
+(frame :number 2 :x 640 :y 0 :width 320 :height 200 :screenw 1280 :screenh 1024) 0,
+(frame :number 1 :x 960 :y 0 :width 320 :height 200 :screenw 1280 :screenh 1024) 0,
+(frame :number 4 :x 0 :y 200 :width 1280 :height 600 :screenw 1280 :screenh 1024) 0,
+(frame :number 6 :x 0 :y 800 :width 640 :height 224 :screenw 1280 :screenh 1024) 0,
+(frame :number 7 :x 640 :y 800 :width 640 :height 224 :screenw 1280 :screenh 1024) 0

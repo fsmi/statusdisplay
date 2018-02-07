@@ -1,0 +1,30 @@
+#!/bin/bash
+
+case "$1" in
+	"VolumeUp")
+		COMMAND="add volume 10"
+		;;
+	"VolumeDown")
+		COMMAND="add volume -10"
+		;;
+	"CycleAudio")
+		COMMAND="cycle audio"
+		;;
+	"Mute")
+		COMMAND="mute"
+		;;
+	"Pause")
+		COMMAND="pause"
+		;;
+	"SeekFront")
+		COMMAND="seek 5"
+		;;
+	"SeekBack")
+		COMMAND="seek -5"
+		;;
+	"*")
+		COMMAND="$1"
+		;;
+esac
+
+printf "%s\n" "$COMMAND" > control/$LOCATION-mpv

@@ -1,0 +1,6 @@
+#!/bin/sh
+while :; do
+	BOFH=$(/usr/games/fortune | sed '/^$/d' | fold -s -w 30)
+	printf '\f%s' "$BOFH"
+	sleep 60
+done | $XECHO -linespacing 10 -padding 10

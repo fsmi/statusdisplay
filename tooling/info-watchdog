@@ -1,0 +1,46 @@
+#!/bin/bash
+source tooling/printer-functions
+
+printeronline(){
+	ping -c 1 $PRINTER.fsmi.uni-karlsruhe.de 2>&1 > /dev/null
+}
+
+CONTROL=control/info-rpcd
+PAGES_LEFT=$(slot_current 1)
+PRINTER_DOWN_SINCE=0
+
+trap ' ' INT TERM EXIT
+
+while true; do
+	if printeronline; then
+		if [ "$PRINTER_DOWN_SINCE" -gt "0" ]; then
+			printf "Printer went up\n"
+			echo "printerdown=0" > "$CONTROL"
+			PRINTER_DOWN_SINCE=0
+		else
+			current_pages=$(slot_current 1)
+			if [ "$PAGES_LEFT" -lt "1550" ] && [ "$current_pages" -lt "$PAGES_LEFT" ]; then
+				if [ "$current_pages" -lt "500" ]; then
+					echo "SUSI165GO" | nc -N localhost 8123
+				else
+					echo "SUSI128GO" | nc -N localhost 8123
+				fi
+			elif [ "$current_pages" -gt "$PAGES_LEFT" ]; then
+				if [ "$current_pages" -gt "3000" ]; then
+					echo "SUSI129GO" | nc -N localhost 8123
+				elif [ "$current_pages" -gt "1600" ]; then
+					echo "SUSI130GO" | nc -N localhost 8123
+				fi
+			fi
+			PAGES_LEFT="$current_pages"
+		fi
+	else
+		if [ "$PRINTER_DOWN_SINCE" == "0" ]; then
+			printf "Printer went down\n"
+			PRINTER_DOWN_SINCE=$(date +%s)
+			echo "printerdown=$PRINTER_DOWN_SINCE" > "$CONTROL"
+		fi
+	fi
+
+	sleep 10
+done | logger -t watchdog

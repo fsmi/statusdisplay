@@ -1,0 +1,2 @@
+#!/bin/bash
+tooling/mpdinfo/mpdinfo --config config/mpdinfo.conf | $XECHO -independent-lines -maxsize 70 -padding 10 -linespacing 7

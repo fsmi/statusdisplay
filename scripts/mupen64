@@ -1,0 +1,17 @@
+#!/bin/bash
+
+GAMES="/home/sd/games/ROMs"
+CONTROLLERS="/dev/input/virtual"
+
+if [ ! -d "$CONTROLLERS" ]; then
+	xecho -no-stdin -bc black -fc red -maxsize 100 "No controllers connected"
+	exit 0
+fi
+
+IMG="$GAMES/$1.n64"
+if [ ! -f "$IMG" ]; then
+	printf "No such ROM\n"
+	exit 1
+fi
+
+/usr/games/mupen64plus --resolution fullscreen "$IMG"

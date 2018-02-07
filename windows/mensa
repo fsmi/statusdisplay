@@ -1,0 +1,2 @@
+#!/bin/bash
+non-public/mensa | $XECHO -linespacing 10 -padding 10 -align nw

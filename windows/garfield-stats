@@ -1,0 +1,31 @@
+#!/bin/bash
+
+SPEZI_CODE="'1010','4066600603405', '41045848'"
+GLORIETTA="'1011','40140886011634'"
+
+SNACK_STATS="
+SELECT coalesce(sum(a.sales),0) AS sales FROM (
+	SELECT
+		snacks.location_id AS location,
+		date_trunc('day', snack_sales_log_timestamp) AS day,
+		snack_barcode,
+		COALESCE(count(*), 0) AS sales
+	FROM garfield.snack_sales_log
+	JOIN garfield.snacks USING (snack_id)
+	GROUP BY day, snacks.location_id, snack_barcode
+	ORDER BY day DESC) a
+	WHERE
+		a.day = date_trunc('day', now())
+		AND a.snack_barcode IN (%s)
+		AND a.location = 1
+"
+
+while true; do
+	Q=$(printf "$SNACK_STATS" "$SPEZI_CODE")
+	SPEZIS=$(printf "%s*0.5\n" "$(psql -h fsmi-db -A -t -c "$Q" "dbname=garfield sslmode=require")" | bc)
+	Q=$(printf "$SNACK_STATS" "$GLORIETTA")
+	GLORIETTAS=$(printf "%s*0.5\n" "$(psql -h fsmi-db -A -t -c "$Q" "dbname=garfield sslmode=require")" | bc)
+
+	printf "\fSpezi:     %sl\nGlorietta: %sl\n" "$SPEZIS" "$GLORIETTAS"
+	sleep 60
+done | $XECHO -independent-lines -padding 15 -linespacing 10

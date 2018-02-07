@@ -1,0 +1,10 @@
+#!/bin/sh
+
+atis(){
+	curl --silent --data "@non-public/atis-secret" https://atis.informatik.kit.edu/1192.php | sed -n 's,^.*<td><u>Gesamtes Guthaben</u>:</td><td>\([^<]*\)</td>.*$,\1,p'
+}
+
+while :; do
+	printf "\fATIS-Guthaben\n%s Seiten" "$(atis)"
+	sleep 20
+done | $XECHO -stdin -independent-lines -padding 15 -linespacing 10 

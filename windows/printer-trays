@@ -1,0 +1,22 @@
+#!/bin/bash
+source tooling/printer-functions
+
+slot_info(){
+	current=$(slot_current $1)
+	name=$(slot_name $1)
+	if [ "$?" = "1" ]; then
+		printf "Printer down\n"
+	else
+		case $current in
+			-2) paper="Warning";;
+			*) paper="$current";;
+		esac
+		printf "%s: %4s\n" "$name" "$paper"
+	fi
+}
+
+while true; do
+	OUT=$(slot_info 1 && slot_info 2)
+	printf '\f%s\nToner: %s\n' "$OUT" "$(toner)"
+	sleep 10
+done | $XECHO -independent-lines -linespacing 10 -padding 15

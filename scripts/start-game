@@ -1,0 +1,30 @@
+#!/bin/bash
+
+GAMES="/home/sd/games"
+CONTROLLERS="/dev/input/virtual"
+
+if [ $# -ne 1 ]; then
+	echo "Game needed as first and only argument"
+	exit 1
+fi
+
+if [ ! -d "$CONTROLLERS" ]; then
+	xecho -no-stdin -bc black -fc red -maxsize 100 "No controllers connected"
+	exit 0
+fi
+
+case "$1" in
+	Broforce)
+		cd $GAMES/Broforce && exec ./Broforce.x86_64
+		;;
+	Hammerwatch)
+		cd $GAMES/Hammerwatch && exec ./Hammerwatch.bin.x86_64
+		;;
+	SuperMeatBoy)
+		cd $GAMES/SMG && exec ./SuperMeatBoy
+		;;
+	*)
+		echo "Unknown Game"
+		exit 1
+		;;
+esac

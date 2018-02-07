@@ -1,0 +1,24 @@
+[submodule "tooling/rpcd"]
+	path = tooling/rpcd
+	url = https://github.com/fsmi/rpcd
+[submodule "tooling/xecho"]
+	path = tooling/xecho
+	url = https://github.com/cbdevnet/xecho
+[submodule "tooling/inputtools"]
+	path = tooling/inputtools
+	url = https://github.com/kitinfo/network-gamepads
+[submodule "tooling/dolphin"]
+	path = tooling/dolphin
+	url = https://github.com/dolphin-emu/dolphin
+[submodule "tooling/mpdinfo"]
+	path = tooling/mpdinfo
+	url = https://github.com/jduepmeier/mpdinfo
+[submodule "tooling/martrix"]
+	path = tooling/martrix
+	url = https://github.com/cbdevnet/martrix
+[submodule "tooling/timers-cli"]
+	path = tooling/timers-cli
+	url = https://github.com/kitinfo/timers-cli
+[submodule "tooling/xelflut"]
+	path = tooling/xelflut
+	url = https://github.com/cbdevnet/xelflut

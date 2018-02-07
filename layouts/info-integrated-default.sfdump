@@ -1,0 +1,4 @@
+(frame :number 0 :x 0 :y 0 :width 640 :height 278 :screenw 1280 :screenh 1024 :window 12582913 :last-access 122 :dedicated 0) 0,
+(frame :number 2 :x 640 :y 0 :width 640 :height 278 :screenw 1280 :screenh 1024 :window 2097153 :last-access 118 :dedicated 0) 0,
+(frame :number 3 :x 0 :y 278 :width 1280 :height 484 :screenw 1280 :screenh 1024 :window 29360129 :last-access 126 :dedicated 0) 0,
+(frame :number 4 :x 0 :y 762 :width 1280 :height 262 :screenw 1280 :screenh 1024 :window 33554433 :last-access 127 :dedicated 0) 0

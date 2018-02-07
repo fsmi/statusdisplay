@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# This tool builds a Dolphin GameCube controller file from
+# a set of profiles and a set of input devices, matching
+# their names against the profile names.
+# This is used with the udev rule file provided by the network-gamepads
+# project to only use networked inputs with dolphin
+
+OUTPUT_CONFIG="non-public/dolphin/Config/GCPadNew.ini"
+DOLPHIN_CONFIG="non-public/dolphin/Config/Dolphin.ini"
+PROFILES="config/dolphin"
+EVENT_PREFIX="evdev"
+CONTROLLERS="/dev/input/virtual"
+
+if [ ! -d "$CONTROLLERS" ]; then
+	printf "No controllers available\n"
+	exit 1
+fi
+
+# Clear the output config
+: > "$OUTPUT_CONFIG"
+
+i=1
+for dev in "$CONTROLLERS/"*; do
+	dev=$(basename "$dev")
+	PROFILE="default.ini"
+	NAME=$(echo "$dev" | sed -e 's/[0-9]*$//g')
+	if [ "$OLDNAME" = "$NAME" ]; then
+		NUM=$((num + 1))
+	else
+		NUM=0
+		OLDNAME="$NAME"
+	fi
+
+	if [ -f "$PROFILES/$NAME.ini" ]; then
+		PROFILE="$NAME.ini"
+	fi
+
+	printf "Dolphin controller %s: %s %s => %s\n" "$i" "$NUM" "$NAME" "$PROFILE"
+
+	echo "[GCPad$i]" >> "$OUTPUT_CONFIG"
+	echo "Device = $EVENT_PREFIX/$NUM/$NAME" >> "$OUTPUT_CONFIG"
+	cat "$PROFILES/$PROFILE" | tail -n +3 >> "$OUTPUT_CONFIG"
+
+	INTNO=$((i - 1))
+	printf "Activating controller %s\n" "$INTNO"
+	sed -i -E "s/^SIDevice$INTNO = (.*)$/SIDevice$INTNO = 6/g" "$DOLPHIN_CONFIG"
+	i=$((i + 1))
+	if [ $i -gt 4 ]; then
+		break
+	fi
+done
+
+dev=$((i - 1))
+# deactivate other controllers
+while true; do
+	if [ $dev -gt 3 ]; then
+		break
+	fi
+
+	printf "Disabling controller %s\n" "$dev"
+	sed -i -E "s/^SIDevice$dev = (.*)$/SIDevice$dev = 0/g" "$DOLPHIN_CONFIG"
+
+	dev=$((dev + 1))
+done

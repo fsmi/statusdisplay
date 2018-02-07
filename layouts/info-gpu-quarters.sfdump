@@ -1,0 +1,8 @@
+(frame :number 0 :x 0 :y 0 :width 960 :height 540 :screenw 1920 :screenh 1080 :window 20971521 :last-access 21 :dedicated 0) 0,
+(frame :number 3 :x 960 :y 0 :width 960 :height 540 :screenw 1920 :screenh 1080 :window 16777217 :last-access 22 :dedicated 0) 0,
+(frame :number 4 :x 0 :y 540 :width 960 :height 540 :screenw 1920 :screenh 1080 :window 10485761 :last-access 6 :dedicated 0) 0,
+(frame :number 5 :x 960 :y 540 :width 960 :height 540 :screenw 1920 :screenh 1080 :window 23068673 :last-access 12 :dedicated 0) 0,
+(frame :number 2 :x 0 :y 0 :width 640 :height 278 :screenw 1280 :screenh 1024 :window 12582913 :last-access 122 :dedicated 0) 1,
+(frame :number 1 :x 640 :y 0 :width 640 :height 278 :screenw 1280 :screenh 1024 :window 2097153 :last-access 118 :dedicated 0) 1,
+(frame :number 12 :x 0 :y 278 :width 1280 :height 484 :screenw 1280 :screenh 1024 :window 29360129 :last-access 126 :dedicated 0) 1,
+(frame :number 13 :x 0 :y 762 :width 1280 :height 262 :screenw 1280 :screenh 1024 :window 33554433 :last-access 127 :dedicated 0) 1

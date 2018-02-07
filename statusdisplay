@@ -1,0 +1,36 @@
+#!/bin/bash
+
+cleanup(){
+	kill $(jobs -p)
+}
+
+trap cleanup INT TERM EXIT
+source sd-config
+printf "Statusdisplay starting up in mode %s\n" "$LOCATION"
+
+#printf "\n\nConfiguring initial displays\n"
+# Set up the displays
+DISPLAY=:0 xrandr --output DVI-I-3 --right-of DVI-I-2
+
+printf "\n\nStarting ratpoison instances and configuring X\n"
+# Start ratpoison
+for dpy in $HEADS; do
+	export DISPLAY="$dpy"
+	printf "Configuring adapter %s\n" "$DISPLAY"
+	$RATPOISON -f config/ratpoison.conf &
+	# Stop powersaving & blanking
+	xset dpms force on
+	xset -dpms
+	xset s off
+done
+
+printf "\n\nCreating control FIFOs\n"
+# Create mpv control FIFO
+rm -f "control/$LOCATION-mpv"
+mkfifo "control/$LOCATION-mpv"
+
+printf "\n\nStarting window manager manager\n"
+tooling/rpcd/daemon/rpcd "$RPCDCFG" | logger -t rpcd &
+
+$WATCHDOG &
+wait

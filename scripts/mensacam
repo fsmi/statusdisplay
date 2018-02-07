@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -e
+TEMP=$(mktemp -d)
+CAMURL="https://www.sw-ka.de/layout/mensaCamPic"
+
+cleanup(){
+	rm -rf "$TEMP"
+}
+
+fetch(){
+	for img in $(seq 1 2); do
+		curl -s --compress "$CAMURL$img.jpg" -o $TEMP/$img.jpg
+	done
+	montage $TEMP/1.jpg $TEMP/2.jpg -tile 2x1 -geometry +0+0 $TEMP/mensa.jpg
+}
+
+trap cleanup EXIT
+while true; do
+	fetch
+	feh -s -Z --image-bg black $TEMP/mensa.jpg &
+	sleep 300
+	kill $(jobs -p)
+done

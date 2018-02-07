@@ -1,0 +1,15 @@
+#!/bin/bash
+
+CHANNEL_BASE="non-public/tv-channels"
+xecho -no-stdin -bc black -fc red -maxsize 100 "Please wait..." &
+
+if [ $# -ne 1 ];
+then
+	echo "Channel needed as first and only argument"
+	exit 1
+fi 
+
+CHANNEL=$(basename "$1").m3u
+
+mpv --input-file=control/$LOCATION-mpv --include=config/mpv/$LOCATION --playlist "$CHANNEL_BASE/$CHANNEL"
+kill %1

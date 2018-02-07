@@ -1,0 +1,17 @@
+#!/bin/bash
+
+while true; do
+	STATS=$(psql -h fsmi-db -A -F ": " -t \
+		-c "SELECT 'Tickets geschlossen', COALESCE(COUNT(*), 0::numeric) FROM rt.transactions
+			WHERE objecttype = 'RT::Ticket' AND (type = 'Status' AND newvalue IN ('resolved', 'rejected', 'deleted'))
+			AND date_trunc('day', created) = date_trunc('day', now()) 
+		UNION
+			SELECT 'Tickets neu', COALESCE(COUNT(*), 0::numeric) FROM rt.transactions
+			WHERE objecttype = 'RT::Ticket' AND type = 'Create'
+			AND date_trunc('day', created) = date_trunc('day', now())
+			" "dbname=fsmi sslmode=require");
+	TICKET=$(psql -h fsmi-db -A -t -c "SELECT '#' || id || ': \"' || subject || '\"' FROM rt.tickets WHERE queue = 10 AND status IN ('open', 'new') ORDER BY random() LIMIT 1;" "dbname=fsmi sslmode=require")
+
+	printf "\f$STATS\nWie waere es mit $TICKET" | fold -s -w 36
+	sleep 60
+done | $XECHO -linespacing 3 -padding 10

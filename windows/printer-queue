@@ -1,0 +1,2 @@
+#!/bin/bash
+non-public/printer-queue/main.py | $XECHO -linespacing 7 -padding 20 -align nw

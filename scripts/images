@@ -1,0 +1,4 @@
+#!/bin/sh
+
+picture=$(basename $1)
+feh --image-bg black --scale-down "non-public/images/$picture.png"

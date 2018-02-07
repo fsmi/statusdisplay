@@ -1,0 +1,7 @@
+vo=xv
+border
+cache=2048
+quiet
+input-terminal=no
+no-keepaspect-window
+no-ytdl

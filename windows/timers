@@ -1,0 +1,2 @@
+#!/bin/bash
+tooling/timers-cli/timers-cli | $XECHO -independent-lines -maxsize 70 -padding 10 -linespacing 7

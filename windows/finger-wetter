@@ -1,0 +1,7 @@
+#!/bin/bash
+
+while true; do
+	WEATHER=$(finger karlsruhe@graph.no)
+	printf "\f%s" "$WEATHER"
+	sleep 600
+done | $XECHO -linespacing 1 -padding 0 -align w

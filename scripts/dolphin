@@ -1,0 +1,34 @@
+#!/bin/bash
+
+GAMES="/home/sd/games/ROMs"
+CONTROLLERS="/dev/input/virtual"
+
+
+if [ ! -d "$CONTROLLERS" ]; then
+	xecho -no-stdin -bc black -fc red -maxsize 100 "No controllers connected"
+	exit 0
+fi
+
+
+rm non-public/dolphin/GC
+case "$1" in
+	EasyMode)
+		ln -s Cards/easy non-public/dolphin/GC
+		;;
+	HardMode)
+		ln -s Cards/hard non-public/dolphin/GC
+		;;
+	*)
+		printf "No such card\n"
+		exit 1
+		;;
+esac
+
+IMG="$GAMES/$2.iso"
+if [ ! -f "$IMG" ]; then
+	printf "No such ROM\n"
+	exit 1
+fi
+
+tooling/dolphin-pad-config
+tooling/dolphin/Build/Binaries/dolphin-emu-nogui --user=non-public/dolphin "$IMG"

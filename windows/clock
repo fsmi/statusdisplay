@@ -1,0 +1,10 @@
+#!/bin/sh
+
+while :; do
+	TIMESTAMP=$(date '+%s')
+	DATE=$(date --date="@$TIMESTAMP" '+%a, %Y-%m-%d')
+	CET=$(date --date="@$TIMESTAMP" '+%T %4Z')
+	UTC=$(date --date="@$TIMESTAMP" -u '+%T %4Z%n%s')
+	printf '\f%s\n%s\n%s' "$DATE" "$CET" "$UTC"
+	sleep 1
+done | $XECHO -linespacing 10 -padding 10
