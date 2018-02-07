@@ -39,3 +39,8 @@ which is not provided to the general public for various reasons.
 * `scripts/`: Scripts used for providing user-startable commands
 * `tooling/`: Tools used for the operation of this repository, most provided as git submodules
 * `windows/`: Scripts used for providing automated information windows
+
+## License
+All code within this repository itself is placed under the BSD 2-clause license, as reproduced
+in [LICENSE.txt](LICENSE.txt). The various third-party repositories in `tooling/` impose their
+own respective licenses.
