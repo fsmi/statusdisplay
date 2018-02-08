@@ -1,6 +1,11 @@
 #!/bin/bash
 source tooling/printer-functions
 
+cleanup(){
+	kill $(jobs -p)
+	exit 0
+}
+
 printeronline(){
 	ping -c 1 $PRINTER.fsmi.uni-karlsruhe.de 2>&1 > /dev/null
 }
@@ -9,7 +14,7 @@ CONTROL=control/info-rpcd
 PAGES_LEFT=$(slot_current 1)
 PRINTER_DOWN_SINCE=0
 
-trap ' ' INT TERM EXIT
+trap cleanup INT TERM EXIT
 
 while true; do
 	if printeronline; then
@@ -43,4 +48,6 @@ while true; do
 	fi
 
 	sleep 10
-done | logger -t watchdog
+done | logger -t watchdog &
+
+wait

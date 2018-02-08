@@ -1,0 +1,2 @@
+#!/bin/sh
+$XECHO -no-stdin -linespacing 10 -padding 10 REWE-ALARM

@@ -2,13 +2,14 @@
 
 cleanup(){
 	kill $(jobs -p)
+	exit 0
 }
 
 trap cleanup INT TERM EXIT
 source sd-config
 printf "Statusdisplay starting up in mode %s\n" "$LOCATION"
 
-#printf "\n\nConfiguring initial displays\n"
+printf "\n\nConfiguring initial displays\n"
 # Set up the displays
 DISPLAY=:0 xrandr --output DVI-I-3 --right-of DVI-I-2
 
@@ -31,6 +32,6 @@ mkfifo "control/$LOCATION-mpv"
 
 printf "\n\nStarting window manager manager\n"
 tooling/rpcd/daemon/rpcd "$RPCDCFG" | logger -t rpcd &
-
 $WATCHDOG &
+
 wait
