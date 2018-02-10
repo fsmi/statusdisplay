@@ -29,7 +29,17 @@ for slot in A B; do
 	sed -i -E "s,^Memcard${slot}Path = (.*)$,Memcard${slot}Path = non-public/dolphin/${CARD}/MemoryCard${slot}.EUR.raw,g" "$DOLPHINCFG"
 done
 
-IMG="$GAMES/$2.iso"
+case "$2" in
+	On)
+		AUDIO="ALSA"
+		;;
+	*)
+		AUDIO="No"
+		;;
+esac
+sed -i -E "s,^Backend = (.*)$,Backend = $AUDIO,g" "$DOLPHINCFG"
+
+IMG="$GAMES/$3.iso"
 if [ ! -f "$IMG" ]; then
 	printf "No such ROM\n"
 	exit 1
