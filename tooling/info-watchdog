@@ -13,6 +13,7 @@ printeronline(){
 CONTROL=control/info-rpcd
 PAGES_LEFT=$(slot_current 1)
 PRINTER_DOWN_SINCE=0
+PRINTER_TEXT=$(printer_status)
 
 trap cleanup INT TERM EXIT
 
@@ -46,6 +47,24 @@ while true; do
 			echo "printerdown=$PRINTER_DOWN_SINCE" > "$CONTROL"
 		fi
 	fi
+
+	current_text=$(printer_status)
+	if [ "$PRINTER_TEXT" != "$current_text" ]; then
+		case "$current_text" in
+			"Abdeckung"*)
+				echo "SUSI168GO" | nc -N localhost 8123
+				;;
+			"Heftklammern"*)
+				echo "SUSI167GO" | nc -N localhost 8123
+				;;
+			"Papierstau"*)
+				echo "SUSI166GO" | nc -N localhost 8123
+				;;
+			*)
+				;;
+		esac
+	fi
+	PRINTER_TEXT="$current_text"
 
 	sleep 10
 done | logger -t watchdog &

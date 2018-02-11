@@ -17,6 +17,6 @@ slot_info(){
 
 while true; do
 	OUT=$(slot_info 1 && slot_info 2)
-	printf '\f%s\nToner: %s\n' "$OUT" "$(toner)"
+	printf '\f%s\nToner: %s\n%s\n' "$OUT" "$(toner)" "$(printer_status)"
 	sleep 10
 done | $XECHO -independent-lines -linespacing 10 -padding 15
