@@ -34,4 +34,8 @@ printf "\n\nStarting window manager manager\n"
 tooling/rpcd/daemon/rpcd "$RPCDCFG" | logger -t rpcd &
 $WATCHDOG &
 
+# Work around a temporary window assignment bug
+sleep 5
+curl http://localhost:8080/reset
+
 wait
