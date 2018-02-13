@@ -23,6 +23,9 @@ case "$1" in
 	SuperMeatBoy)
 		cd $GAMES/SMG && exec ./SuperMeatBoy
 		;;
+	DontStarve)
+		cd $GAMES/dontstarve && exec ./start.sh
+		;;
 	*)
 		echo "Unknown Game"
 		exit 1
