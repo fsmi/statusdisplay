@@ -25,7 +25,7 @@ while true; do
 			PRINTER_DOWN_SINCE=0
 		else
 			current_pages=$(slot_current 1)
-			if [ "$PAGES_LEFT" -lt "1550" ] && [ "$current_pages" -lt "$PAGES_LEFT" ]; then
+			if [ "$PAGES_LEFT" -le "1550" ] && [ "$current_pages" -lt "$PAGES_LEFT" ]; then
 				if [ "$current_pages" -lt "500" ]; then
 					echo "SUSI165GO" | nc -N localhost 8123
 				else
