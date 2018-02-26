@@ -2,3 +2,4 @@ non-public/
 control/
 *.log
 logs/
+tooling/evname

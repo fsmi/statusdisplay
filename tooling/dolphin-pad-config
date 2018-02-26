@@ -24,7 +24,7 @@ i=1
 for dev in "$CONTROLLERS/"*; do
 	dev=$(basename "$dev")
 	PROFILE="default.ini"
-	NAME=$(echo "$dev" | sed -e 's/[0-9]*$//g')
+	NAME=$(tooling/evname "$dev")
 	if [ "$OLDNAME" = "$NAME" ]; then
 		NUM=$((num + 1))
 	else

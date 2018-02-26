@@ -13,3 +13,4 @@ all:
 	$(MKDIR) dolphin/Build
 	cd dolphin/Build && cmake ..
 	$(MAKE) -C dolphin/Build
+	$(MAKE) evname
