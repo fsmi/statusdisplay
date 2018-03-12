@@ -1,5 +1,6 @@
-(frame :number 0 :x 0 :y 0 :width 610 :height 180 :screenw 1920 :screenh 1080 :window 20971521 :last-access 21 :dedicated 0) 0,
-(frame :number 3 :x 610 :y 0 :width 610 :height 180 :screenw 1920 :screenh 1080 :window 16777217 :last-access 22 :dedicated 0) 0,
+(frame :number 0 :x 0 :y 0 :width 305 :height 180 :screenw 1920 :screenh 1080 :window 20971521 :last-access 21 :dedicated 0) 0,
+(frame :number 3 :x 305 :y 0 :width 610 :height 180 :screenw 1920 :screenh 1080 :window 16777217 :last-access 22 :dedicated 0) 0,
+(frame :number 14 :x 915 :y 0 :width 305 :height 180 :screenw 1920 :screenh 1080) 0,
 (frame :number 10 :x 1220 :y 0 :width 330 :height 180 :screenw 1920 :screenh 1080 :window 0 :last-access 24 :dedicated 0) 0,
 (frame :number 11 :x 1550 :y 0 :width 370 :height 180 :screenw 1920 :screenh 1080 :window 27262977 :last-access 25 :dedicated 0) 0,
 (frame :number 4 :x 0 :y 180 :width 960 :height 750 :screenw 1920 :screenh 1080 :window 10485761 :last-access 6 :dedicated 0) 0,

@@ -1,0 +1,19 @@
+#!/bin/bash
+APIKEY=$(<non-public/aqi-apikey)
+
+aqi(){
+	curl --silent "http://api.waqi.info/feed/@6161/?token=$APIKEY"
+}
+
+while :; do
+	AQIJSON=$(aqi)
+	VALUE_AQI=$(echo "$AQIJSON" | jq '.data.aqi')
+	VALUE_H=$(echo "$AQIJSON" | jq '.data.iaqi.h.v')
+	VALUE_NO2=$(echo "$AQIJSON" | jq '.data.iaqi.no2.v')
+	VALUE_O3=$(echo "$AQIJSON" | jq '.data.iaqi.o3.v')
+	VALUE_V=$(echo "$AQIJSON" | jq '.data.iaqi.p.v')
+	VALUE_PM10=$(echo "$AQIJSON" | jq '.data.iaqi.pm10.v')
+	VALUE_T=$(echo "$AQIJSON" | jq '.data.iaqi.t.v')
+	printf "\fAQI %s\nTemp %4s  |  Hum %5s\nNO2 %3s | O3 %3s | PM10 %3s" "$VALUE_AQI" "$VALUE_H" "$VALUE_T" "$VALUE_NO2" "$VALUE_O3" "$VALUE_PM10"
+	sleep 600
+done | $XECHO -stdin -independent-lines -padding 15 -linespacing 10 
