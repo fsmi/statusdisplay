@@ -4,7 +4,7 @@ match=0
 echo "$1" >> logs/video-history.log
 
 # Fix up missing protocols
-if [[ "$1" == https://* ]]; then
+if [[ "$1" == https://* ]] || [[ "$1" == http://* ]] || [[ "$1" == rtsp://* ]]; then
 	VIDEO="$1"
 else
 	VIDEO="https://$1"

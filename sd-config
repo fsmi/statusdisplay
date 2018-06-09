@@ -2,6 +2,7 @@
 export LANG="en_US.UTF-8"
 export HOME=/home/sd
 export RATPOISON=ratpoison
+export SHELL=/bin/bash
 
 case "$(hostname)" in
 	fsm-hase*)
