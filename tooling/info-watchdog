@@ -57,7 +57,7 @@ while true; do
 				fi
 				;;
 			"Heftklammern"*)
-				echo "SUSI167GO" | nc -N localhost 8123
+				echo "SUSI252GO" | nc -N localhost 8123
 				touch /tmp/printer-staples-out
 				;;
 			"Papierstau"*)

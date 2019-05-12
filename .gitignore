@@ -3,3 +3,4 @@ control/
 *.log
 logs/
 tooling/evname
+.nfs*

@@ -1,6 +1,5 @@
 #!/bin/sh
 
-set -e
 while :; do
 	BOFH=$(/usr/games/fortune | sed '/^$/d' | fold -s -w 30)
 	printf '\f%s' "$BOFH"
