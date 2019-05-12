@@ -52,15 +52,19 @@ while true; do
 	if [ "$PRINTER_TEXT" != "$current_text" ]; then
 		case "$current_text" in
 			"Abdeckung"*)
-				echo "SUSI168GO" | nc -N localhost 8123
+				if [ ! -f /tmp/printer-staples-out ]; then
+					echo "SUSI168GO" | nc -N localhost 8123
+				fi
 				;;
 			"Heftklammern"*)
 				echo "SUSI167GO" | nc -N localhost 8123
+				touch /tmp/printer-staples-out
 				;;
 			"Papierstau"*)
 				echo "SUSI166GO" | nc -N localhost 8123
 				;;
 			*)
+				rm /tmp/printer-staples-out
 				;;
 		esac
 	fi

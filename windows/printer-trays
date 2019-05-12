@@ -1,6 +1,8 @@
 #!/bin/bash
 source tooling/printer-functions
 
+set -e
+
 slot_info(){
 	current=$(slot_current $1)
 	name=$(slot_name $1)

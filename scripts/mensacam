@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -e
 TEMP=$(mktemp -d)
 CAMURL="https://www.sw-ka.de/layout/mensaCamPic"
 

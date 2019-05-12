@@ -1,6 +1,9 @@
 #!/bin/bash
 
+set -e
+
 while true; do
+	#WEATHER=$(curl "de.wttr.in/karlsruhe?TF1qp")
 	WEATHER=$(finger karlsruhe@graph.no)
 	printf "\f%s" "$WEATHER"
 	sleep 600

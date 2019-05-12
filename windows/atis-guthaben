@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 atis(){
 	curl --silent --data "@non-public/atis-secret" https://atis.informatik.kit.edu/1192.php | sed -n 's,^.*<td><u>Gesamtes Guthaben</u>:</td><td>\([^<]*\)</td>.*$,\1,p'
 }

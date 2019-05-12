@@ -23,5 +23,6 @@ if [ "$match" -eq 0 ]; then
 fi
 
 xecho -no-stdin -fc red -bc black -maxsize 100 "Please wait..." &
-mpv --input-file=control/$LOCATION-mpv --include=config/mpv/$LOCATION --ytdl "$VIDEO"
+VIDEO=$(~/youtube-dl/youtube-dl -g -f best "$VIDEO")
+mpv --input-file=control/$LOCATION-mpv --include=config/mpv/$LOCATION "$VIDEO"
 kill $(jobs -p)

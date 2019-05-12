@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 while true; do
 	ODIE=$(psql -h fsmi-db -A -F ": " -t -c "SELECT regexp_replace(regexp_replace(regexp_replace(type_id, 'EXAM_SALE', 'Sales heute'), 'EXAM_DEPOSIT_PAYMENT', 'Pfand ein'), 'EXAM_DEPOSIT_WITHDRAWAL', 'Pfand aus'), count(*) FROM garfield.cash_box_log WHERE type_id IN ('EXAM_SALE','EXAM_DEPOSIT_PAYMENT', 'EXAM_DEPOSIT_WITHDRAWAL') AND date_trunc('day',cash_box_log_timestamp) = current_date GROUP BY type_id;" "dbname=garfield sslmode=require")
 	TOP=$(psql -h fsmi-db -A -F ": " -t -c "SELECT 'FotD', user_name || ' (' || sum || ')'  FROM (SELECT user_name, sum(cash_box_log_quantity) AS sum FROM garfield.exam_sale_log JOIN garfield.cash_box_log using (cash_box_log_id) JOIN garfield.users on cash_box_log_performed_by_user_id = user_id WHERE date_trunc('day', cash_box_log_timestamp) = date_trunc('day', date 'now') GROUP BY user_name) info order by sum desc limit 1;" "dbname=garfield sslmode=require" )
