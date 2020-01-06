@@ -7,17 +7,25 @@ import requests
 import random
 import urllib.request
 import types
+import argparse
 
 def getMaxIteration():
 	response = requests.get("https://xkcd.com/info.0.json")
 	newestXkcd = json.loads(response.text)
 	return newestXkcd['num']
 
+# parsing waittime
+parser = argparse.ArgumentParser()
+parser.add_argument("-t", "--time", help="the time in seconds an image will be shown", type=int)
+args = parser.parse_args()
+if args.time:
+	waittime = args.time
+	print("waittime: " + str(waittime))
+else:
+	waittime = 30
+
+# pathvarioable for temporary image location
 path = "/tmp/xkcd.png"
-waittime = 4
-
-# get max value
-
 
 # startvalue
 maxIteration = getMaxIteration()
