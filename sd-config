@@ -9,7 +9,7 @@ case "$(hostname)" in
 		export LOCATION="FSM"
 		export PRINTER="fsm-pr3"
 		export MPD_HOST="fsm-hase"
-		export KVV_VIEW_IDS="de:8212:3?;de:8212:2?;de:8212:80?"
+		export KVV_VIEW_IDS="de:8212:3?;de:8212:2?;de:8212:80?;de:8212:3014?"
 		export RPCDCFG="config/rpcd/mathe.conf"
 		export WATCHDOG=true
 		export HEADS="
