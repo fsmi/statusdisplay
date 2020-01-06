@@ -9,7 +9,7 @@ case "$(hostname)" in
 		export LOCATION="FSM"
 		export PRINTER="fsm-pr3"
 		export MPD_HOST="fsm-hase"
-		export KVV_VIEW_IDS="de:8212:3?;de:8212:2?;de:8212:80?;de:8212:3014?"
+		export KVV_VIEW_IDS="de:8212:3?;de:8212:2?;de:8212:80?"
 		export RPCDCFG="config/rpcd/mathe.conf"
 		export WATCHDOG=true
 		export HEADS="
@@ -20,7 +20,7 @@ case "$(hostname)" in
 		export LOCATION="FSI"
 		export PRINTER="fsi-pr2"
 		export MPD_HOST="fsi-mpd"
-		export KVV_VIEW_IDS="de:8212:3?;de:8212:401?maxInfos=5&"
+		export KVV_VIEW_IDS="de:8212:3?;de:8212:401?maxInfos=5&;de:8212:3014?"
 		export RPCDCFG="config/rpcd/info.conf"
 		export WATCHDOG="tooling/info-watchdog"
 		export HEADS="
