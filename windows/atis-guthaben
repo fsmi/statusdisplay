@@ -3,7 +3,7 @@
 set -e
 
 atis(){
-	curl --silent --data "@non-public/atis-secret" https://atis.informatik.kit.edu/1192.php | sed -n 's,^.*<td><u>Gesamtes Guthaben</u>:</td><td>\([^<]*\)</td>.*$,\1,p'
+	curl --silent --data "@non-public/atis-secret" https://atis.informatik.kit.edu/1192.php | sed -n 's,^.*<span>Gesamtes Guthaben</span><span>&lt;/<span class="end-tag">u</span>&gt;</span><span>:</span><span>&lt;/<span class="end-tag">td</span>&gt;</span><span></span><span>&lt;<span class="start-tag">td</span>&gt;</span><span>\([^<]*\)</span>.*$,\1,p'
 }
 
 while :; do
